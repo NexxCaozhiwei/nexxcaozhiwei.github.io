@@ -9,7 +9,6 @@ This is my personal homepage for projects, notes, and updates.
 
 ## Featured
 
-- [Jelly](./jelly/) - Main project page.
 - [GitHub](https://github.com/NexxCaozhiwei) - Public repositories and code.
 - [About](./about/) - Profile and contact information.
 
