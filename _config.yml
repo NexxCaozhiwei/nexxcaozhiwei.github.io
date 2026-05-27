@@ -1,0 +1,16 @@
+title: NexxCaozhiwei
+description: Personal homepage for projects, notes, and updates.
+theme: jekyll-theme-minimal
+url: "https://caozhiwei.com"
+baseurl: ""
+
+author:
+  name: NexxCaozhiwei
+  github: NexxCaozhiwei
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+markdown: kramdown
+permalink: /:categories/:year/:month/:day/:title/
