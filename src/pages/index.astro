@@ -1,0 +1,66 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import tools from "../data/tools.json";
+import services from "../data/services.json";
+
+const posts = Object.values(import.meta.glob("./blog/*.md", { eager: true }))
+  .map((post) => post)
+  .sort((a, b) => new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf())
+  .slice(0, 3);
+---
+<BaseLayout title="NexxCaozhiwei | 个人主页">
+  <section class="hero">
+    <p class="eyebrow">Personal Site</p>
+    <h1>记录、整理、发布。</h1>
+    <p class="lead">这里用于沉淀博客文章、常用工具导航，以及个人产品和服务展示。</p>
+    <div class="actions">
+      <a class="primary" href="/blog/">阅读博客</a>
+      <a href="/tools/">查看工具</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>最新文章</h2>
+      <a href="/blog/">全部文章</a>
+    </div>
+    <div class="list">
+      {posts.map((post) => (
+        <a class="list-item" href={post.url}>
+          <span>{post.frontmatter.title}</span>
+          <time>{post.frontmatter.date}</time>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>常用工具</h2>
+      <a href="/tools/">全部工具</a>
+    </div>
+    <div class="grid">
+      {tools.slice(0, 3).map((tool) => (
+        <a class="card" href={tool.url} target="_blank" rel="noreferrer">
+          <h3>{tool.name}</h3>
+          <p>{tool.description}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>服务展示</h2>
+      <a href="/services/">全部服务</a>
+    </div>
+    <div class="grid">
+      {services.map((service) => (
+        <article class="card">
+          <h3>{service.name}</h3>
+          <p>{service.description}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

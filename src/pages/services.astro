@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import services from "../data/services.json";
+---
+<BaseLayout title="服务展示 | NexxCaozhiwei">
+  <section class="page-title">
+    <h1>服务展示</h1>
+    <p>用于介绍可提供的服务、项目方向或作品能力。</p>
+  </section>
+
+  <section class="grid">
+    {services.map((service) => (
+      <article class="card">
+        <h3>{service.name}</h3>
+        <p>{service.description}</p>
+      </article>
+    ))}
+  </section>
+</BaseLayout>

@@ -1,0 +1,17 @@
+[
+  {
+    "name": "GitHub",
+    "description": "代码仓库、项目协作和站点部署。",
+    "url": "https://github.com/NexxCaozhiwei"
+  },
+  {
+    "name": "Astro Docs",
+    "description": "Astro 官方文档，用于维护当前站点。",
+    "url": "https://docs.astro.build/"
+  },
+  {
+    "name": "GitHub Pages",
+    "description": "当前网站的免费静态托管平台。",
+    "url": "https://pages.github.com/"
+  }
+]
