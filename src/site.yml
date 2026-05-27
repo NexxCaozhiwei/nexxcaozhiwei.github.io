@@ -23,6 +23,7 @@ nav:
   - 首页: "/"
   - 归档: "/archive/"
   - 专题: "/seri/"
+  - 菜谱: "/seri/recipes/"
   - 链接: "/links/"
   - 关于: "/about/"
 
