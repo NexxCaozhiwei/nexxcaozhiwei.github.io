@@ -1,0 +1,66 @@
+site:
+  title: "NexxCaozhiwei"
+  subtitle: "记录技术、工具和想法"
+  url: "https://caozhiwei.com"
+  lang: "zh_cn"
+  author: "NexxCaozhiwei"
+  email: "your-email@example.com"
+  favicon: "/images/favicon.webp"
+  banner: ""
+  og_image: "/og.webp"
+
+profile:
+  avatar: "/images/chongxi-avatar.webp"
+  name: "NexxCaozhiwei"
+  bio: "记录技术、工具和想法"
+  links:
+    - name: "GitHub"
+      url: "https://github.com/NexxCaozhiwei"
+    - name: "主页"
+      url: "https://caozhiwei.com"
+
+nav:
+  - 首页: "/"
+  - 归档: "/archive/"
+  - 专题: "/seri/"
+  - 链接: "/links/"
+  - 关于: "/about/"
+
+features:
+  breadcrumb: true
+  comments: false
+  search: false
+  donate: false
+  rss_feed: true
+  sitemap: true
+  related_posts: true
+  series: true
+  license: true
+
+seo:
+  enable_json_ld: false
+  breadcrumb: true
+  keywords: "NexxCaozhiwei, blog, astro, tools"
+  same_as:
+    - "https://github.com/NexxCaozhiwei"
+
+services:
+  posthog:
+    api_key: ""
+    api_host: "https://app.posthog.com"
+  webmention:
+    url: ""
+  blogsclub:
+    badge_url: ""
+  issue_tracker:
+    url: ""
+
+trusted_domains:
+  - "caozhiwei.com"
+  - "github.com"
+
+copyright:
+  text: "NexxCaozhiwei"
+  site_name: "NexxCaozhiwei"
+  license: "CC BY-NC-SA 4.0"
+  license_url: "https://creativecommons.org/licenses/by-nc-sa/4.0/"

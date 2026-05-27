@@ -1,3 +1,11 @@
-# NexxCaozhiwei Astro Site
+# NexxCaozhiwei
 
-Personal homepage built with Astro and deployed to GitHub Pages.
+Personal site built with Astro and the Lonetrail theme.
+
+## Development
+
+```powershell
+pnpm install
+pnpm dev
+pnpm build
+```
