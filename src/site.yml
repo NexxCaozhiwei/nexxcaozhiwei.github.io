@@ -1,10 +1,10 @@
 site:
-  title: "NexxCaozhiwei"
-  subtitle: "记录技术、工具和想法"
+  title: "理想电波"
+  subtitle: "心怀梦想·简单生活"
   url: "https://caozhiwei.com"
   lang: "zh_cn"
   author: "NexxCaozhiwei"
-  email: "your-email@example.com"
+  email: "nexx@caozhiwei.com"
   favicon: "/images/favicon.webp"
   banner: ""
   og_image: "/og.webp"
@@ -41,7 +41,7 @@ features:
 seo:
   enable_json_ld: false
   breadcrumb: true
-  keywords: "NexxCaozhiwei, blog, astro, tools"
+  keywords: "Caozhiwei, blog, astro, tools"
   same_as:
     - "https://github.com/NexxCaozhiwei"
 
