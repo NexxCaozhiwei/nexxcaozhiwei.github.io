@@ -48,7 +48,7 @@ const metaDescription = `${siteConfig.title} ${linksLabel}`;
 
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
 					{category.links.map((friend: any, i: number) => (
-						<a href={`/go/?url=${encodeURIComponent(friend.link)}`} target="_blank" class="group block space-y-4">
+						<a href={friend.link} target="_blank" class="group block space-y-4">
 							<div class="flex items-start gap-4">
 								<div class="relative w-16 h-16 bg-lt-surface border border-lt-border p-1 shrink-0 flex items-center justify-center overflow-hidden">
 									<div class="absolute -top-1 -left-1 w-3 h-3 border-t border-l border-lt-ink"></div>
