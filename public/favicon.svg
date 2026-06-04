@@ -1,4 +1,49 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <rect width="100" height="100" rx="20" fill="#1a1a2e"/>
-  <text x="50" y="68" font-size="50" font-family="monospace" font-weight="bold" text-anchor="middle" fill="#e94560">S</text>
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="理想电波 favicon">
+  <defs>
+    <linearGradient id="bg" x1="10" y1="8" x2="54" y2="58" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EAF6FF"/>
+      <stop offset="0.55" stop-color="#F7FBFF"/>
+      <stop offset="1" stop-color="#FFF4E8"/>
+    </linearGradient>
+
+    <linearGradient id="wave" x1="16" y1="16" x2="50" y2="50" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8ED7FF"/>
+      <stop offset="1" stop-color="#9D8CFF"/>
+    </linearGradient>
+
+    <linearGradient id="dot" x1="24" y1="23" x2="41" y2="43" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6ECFFF"/>
+      <stop offset="1" stop-color="#7D8CFF"/>
+    </linearGradient>
+
+    <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#8BCDF5" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- soft rounded favicon base -->
+  <rect x="5" y="5" width="54" height="54" rx="16" fill="url(#bg)"/>
+
+  <!-- subtle orbit / ideal signal ring -->
+  <circle cx="32" cy="32" r="21.5" stroke="#CDEEFF" stroke-width="2" opacity="0.78"/>
+  <circle cx="32" cy="32" r="14.5" stroke="#DCE9FF" stroke-width="1.6" opacity="0.72"/>
+
+  <!-- radio wave arcs -->
+  <path d="M22.9 41.1C17.9 36.1 17.9 27.9 22.9 22.9" stroke="url(#wave)" stroke-width="3.2" stroke-linecap="round"/>
+  <path d="M41.1 22.9C46.1 27.9 46.1 36.1 41.1 41.1" stroke="url(#wave)" stroke-width="3.2" stroke-linecap="round"/>
+
+  <path d="M16.4 47.6C7.8 39 7.8 25 16.4 16.4" stroke="#BFE8FF" stroke-width="2.8" stroke-linecap="round" opacity="0.86"/>
+  <path d="M47.6 16.4C56.2 25 56.2 39 47.6 47.6" stroke="#C8C9FF" stroke-width="2.8" stroke-linecap="round" opacity="0.86"/>
+
+  <!-- central signal node -->
+  <circle cx="32" cy="32" r="7.5" fill="url(#dot)" filter="url(#softShadow)"/>
+  <circle cx="32" cy="32" r="3.2" fill="#FFFFFF" opacity="0.96"/>
+
+  <!-- light beam / electric wave detail -->
+  <path d="M12.5 36.5C20.5 29.5 28.7 39.4 36.1 32.4C41.2 27.6 45.6 27.9 51.5 31.2" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" opacity="0.92"/>
+
+  <!-- small ideal star dots -->
+  <circle cx="19" cy="18" r="1.7" fill="#FFFFFF" opacity="0.95"/>
+  <circle cx="48" cy="45" r="1.9" fill="#FFFFFF" opacity="0.92"/>
+  <circle cx="45" cy="19" r="1.2" fill="#89D9FF" opacity="0.8"/>
 </svg>
