@@ -1,0 +1,33 @@
+{
+  "friends": [
+    {
+      "id_name": "cf-links",
+      "desc": "常用入口",
+      "link_list": [
+        {
+          "name": "GitHub",
+          "intro": "代码仓库、项目协作和站点部署。",
+          "link": "https://github.com/NexxCaozhiwei",
+          "avatar": "https://github.com/fluidicon.png"
+        },
+        {
+          "name": "Astro",
+          "intro": "当前站点使用的静态网站框架。",
+          "link": "https://astro.build",
+          "avatar": "https://astro.build/favicon.svg"
+        },
+        {
+          "name": "Lonetrail",
+          "intro": "站点迁移前使用的 Astro 主题。",
+          "link": "https://github.com/ChongxiSama/Lonetrail",
+          "avatar": "https://github.com/fluidicon.png"
+        }
+      ]
+    },
+    {
+      "id_name": "special-links",
+      "desc": "特别推荐",
+      "link_list": []
+    }
+  ]
+}

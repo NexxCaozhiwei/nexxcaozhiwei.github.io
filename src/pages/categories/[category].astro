@@ -1,29 +1,56 @@
 ---
-import ArchivePanel from "@components/pages/ArchivePanel";
-import I18nKey from "@i18n/i18nKey";
-import { i18n } from "@i18n/translation";
-import MainGridLayout from "@layouts/MainGridLayout.astro";
-import { getCategoryList, getSortedPostsList } from "@utils/content-utils";
+import { getCollection } from 'astro:content';
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import PostList from '../../components/PostList.astro';
+import { resolveCover } from '../_imageStore';
+
 export async function getStaticPaths() {
-	const categories = await getCategoryList();
-	return categories.map((category) => {
-		return {
-			params: { category: category.name },
-			props: { name: category.name },
-		};
-	});
+  const posts = await getCollection('blog');
+  const categories = new Set<string>();
+  for (const post of posts) {
+    const cat = post.data.category;
+    if (!cat) continue;
+    categories.add(cat);
+    if (cat.includes('/')) {
+      const parts = cat.split('/');
+      for (let i = 0; i < parts.length; i++) {
+        categories.add(parts.slice(0, i + 1).join('/'));
+      }
+    }
+  }
+  return Array.from(categories).map((cat) => ({ params: { category: cat } }));
 }
-const { name } = Astro.props;
-const allPosts = await getSortedPostsList();
-const filteredPosts = allPosts.filter((post) => {
-	if (name === i18n(I18nKey.uncategorized)) {
-		return !post.data.category;
-	}
-	return post.data.category === name;
-});
-const title = `${i18n(I18nKey.archive)} - ${name}`;
+
+const { category } = Astro.params;
+const allPosts = await getCollection('blog');
+
+const filtered = allPosts
+  .filter((post) => {
+    const cat = post.data.category;
+    if (!cat) return false;
+    return cat === category || cat.startsWith(`${category}/`);
+  })
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const postData = filtered.map((p) => ({
+  ...p,
+  slug: p.id,
+  data: {
+    ...p.data,
+    cover: resolveCover('blog', p.id, p.data.cover),
+  },
+}));
+
+const displayName = category!.split('/').pop()!;
 ---
-<MainGridLayout title={title}>
-    <h1 class="sr-only">{title}</h1>
-    <ArchivePanel client:load sortedPosts={filteredPosts}></ArchivePanel>
-</MainGridLayout>
+
+<BlogLayout title={displayName}>
+  <h1 class="text-2xl font-bold mb-8 flex items-center gap-2">
+    <span class="w-1 h-6 bg-primary rounded-full inline-block"></span>
+    分类：{displayName}
+    <span class="text-base font-normal text-gray-400">
+      ({filtered.length} 篇)
+    </span>
+  </h1>
+  <PostList posts={postData} />
+</BlogLayout>
