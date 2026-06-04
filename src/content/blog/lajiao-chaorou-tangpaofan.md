@@ -4,6 +4,7 @@ description: "两人一餐量的辣椒炒肉汤泡饭做法，用 1 斤五花肉
 date: "2026-05-27"
 tags: ["菜谱", "私房菜", "辣椒炒肉", "家常菜"]
 category: "菜谱"
+cover: "/images/recipes/lajiao-chaorou-tangpaofan/cover.png"
 pinned: false
 draft: false
 ---

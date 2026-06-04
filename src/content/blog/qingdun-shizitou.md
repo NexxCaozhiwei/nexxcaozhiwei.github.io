@@ -4,6 +4,7 @@ description: "一份根据隋坡老师视频和实战经验整理的清炖狮子
 date: "2026-05-27"
 tags: ["菜谱", "私房菜", "狮子头", "家常菜"]
 category: "菜谱"
+cover: "/images/recipes/qingdun-shizitou/cover.png"
 pinned: false
 draft: false
 ---
