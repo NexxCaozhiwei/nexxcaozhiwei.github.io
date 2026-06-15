@@ -7,6 +7,7 @@ tags:
   - AI 编程
   - Agent
   - 工程工作流
+category: "Coding"
 description: "本文介绍一种可复制的 ChatGPT 与 Codex 协同开发方法：当 Codex 额度耗尽时，如何通过 AGENTS.md、HANDOFF.md、Git diff、Issue 和测试日志，让 ChatGPT 接续分析、审查和规划后续开发。"
 cover: "/images/blog/codex-chatgpt-handoff-blog/01-hero.svg"
 ---
