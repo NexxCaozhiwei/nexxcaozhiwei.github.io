@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img">
+  <defs>
+    <style>
+      .title { font: 700 48px 'Microsoft YaHei','Noto Sans CJK SC','PingFang SC',Arial,sans-serif; fill:#0f172a; }
+      .subtitle { font: 400 24px 'Microsoft YaHei','Noto Sans CJK SC','PingFang SC',Arial,sans-serif; fill:#475569; }
+      .label { font: 600 22px 'Microsoft YaHei','Noto Sans CJK SC','PingFang SC',Arial,sans-serif; fill:#1e293b; }
+      .small { font: 400 17px 'Microsoft YaHei','Noto Sans CJK SC','PingFang SC',Arial,sans-serif; fill:#475569; }
+      .tiny { font: 400 14px 'Microsoft YaHei','Noto Sans CJK SC','PingFang SC',Arial,sans-serif; fill:#64748b; }
+      .box { fill:white; stroke:#cbd5e1; stroke-width:2; rx:24; }
+      .accent { fill:#2563eb; }
+      .accent2 { fill:#0f766e; }
+      .accent3 { fill:#7c3aed; }
+      .accent4 { fill:#f97316; }
+      .muted { fill:#e2e8f0; }
+      .line { stroke:#64748b; stroke-width:3; fill:none; marker-end:url(#arrow); }
+      .dash { stroke:#94a3b8; stroke-width:3; fill:none; stroke-dasharray:8 8; marker-end:url(#arrow); }
+      .code { font: 500 18px Consolas,'Microsoft YaHei',monospace; fill:#334155; }
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#64748b"/>
+    </marker>
+    <linearGradient id="hero" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#eff6ff"/>
+      <stop offset="0.55" stop-color="#f8fafc"/>
+      <stop offset="1" stop-color="#ecfeff"/>
+    </linearGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="#f8fafc"/>
+  
+  <text x="70" y="80" class="title">示例：状态灯问题的排查路径</text>
+  <text x="70" y="120" class="subtitle">以 codex-bar“空闲状态不触发”为例，把模糊问题拆成状态机。</text>
+  <rect x="80" y="230" width="230" height="90" rx="24" fill="white" stroke="#cbd5e1"/><text x="130" y="285" class="label">读取状态来源</text>
+  <polygon points="500,220 660,275 500,330 340,275" fill="#fff" stroke="#cbd5e1" stroke-width="2"/><text x="430" y="282" class="label">是否运行中？</text>
+  <rect x="820" y="230" width="220" height="90" rx="24" fill="#dcfce7" stroke="#86efac"/><circle cx="865" cy="275" r="14" fill="#22c55e"/><text x="900" y="285" class="label">工作中</text>
+  <polygon points="500,430 660,485 500,540 340,485" fill="#fff" stroke="#cbd5e1" stroke-width="2"/><text x="420" y="492" class="label">刚完成任务？</text>
+  <rect x="820" y="440" width="220" height="90" rx="24" fill="#dbeafe" stroke="#93c5fd"/><circle cx="865" cy="485" r="14" fill="#3b82f6"/><text x="900" y="495" class="label">已完成</text>
+  <rect x="250" y="610" width="220" height="90" rx="24" fill="#fee2e2" stroke="#fca5a5"/><circle cx="295" cy="655" r="14" fill="#ef4444"/><text x="330" y="665" class="label">空闲</text>
+  <path d="M310 275 L340 275" class="line"/>
+  <path d="M660 275 L820 275" class="line"/><text x="708" y="258" class="small">是</text>
+  <path d="M500 330 L500 430" class="line"/><text x="515" y="385" class="small">否</text>
+  <path d="M660 485 L820 485" class="line"/><text x="708" y="468" class="small">是</text>
+  <path d="M500 540 C500 600, 470 655, 470 655" class="line"/><text x="515" y="585" class="small">否</text>
+  <path d="M1040 485 C1120 485,1120 655,470 655" class="dash"/><text x="770" y="650" class="small">完成状态过期后回到空闲</text>
+
+</svg>
