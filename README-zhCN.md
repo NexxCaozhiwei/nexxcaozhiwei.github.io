@@ -1,99 +1,67 @@
-# Lonetrail
+# 理想电波
 
-<p align="center">
-  <img src="public/og.webp" alt="Lonetrail" width="100%">
-</p>
+个人静态博客，地址为 https://caozhiwei.com，当前页面风格基于 astro-theme-sify。
 
-![Astro](https://img.shields.io/badge/Astro-6.3-FF5D01?style=for-the-badge&logo=astro&logoColor=white)
-![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=white)
-![Tailwind](https://img.shields.io/badge/Tailwind-4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+## 技术与功能
 
-![Astro](https://img.shields.io/badge/Astro-6.3-FF5D01?logo=astro&logoColor=white)
-![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-06B6D4?logo=tailwindcss&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
-![License](https://img.shields.io/badge/license-MIT-green)
+Astro 6、TypeScript、Tailwind CSS 4；支持 Markdown/MDX、分类、标签、归档、分页、RSS、深色模式、文章目录、阅读时间、代码复制、KaTeX 数学公式和 Shiki 代码高亮。
 
-极简 Astro 博客模板。YAML 全配置驱动，开箱即用。
+搜索范围为标题、摘要、分类、标签以及正文前 400 个字符。Waline 评论可选启用。
 
-## 功能
+## 本地开发
 
-- **Astro v6** — Island 架构，零 JS 默认输出
-- **React 19** — 按需交互组件
-- **Tailwind CSS 4** — 原子化样式
-- **全文归档** — 可搜索的文章列表
-- **分类与标签** — 基于分类法的组织方式
-- **专题系列** — 将文章归入系列
-- **多语言** — 简体中文、繁体中文、英文
-- **KaTeX** — 数学公式渲染
-- **Mermaid** — 图表支持
-- **代码高亮** — 带主题的语法着色
-- **PostHog 统计** — 可选，可配置
-- **RSS / Atom / Sitemap** — 自动生成
-- **深色模式** — 内置主题切换
-- **响应式** — 移动优先，桌面优化
+使用 Node.js 22 和 pnpm 11，与部署工作流保持一致。
 
-## 快速开始
-
-```bash
+```sh
 pnpm install
-pnpm dev       # http://localhost:4321
-pnpm build     # 输出: dist/
+pnpm dev
+pnpm build
+pnpm preview
 ```
 
-## 配置
+开发地址通常为 http://localhost:4321，构建输出在 `dist/`。
 
-所有站点设置在 `src/site.yml`：
+## 配置与目录
 
-```yaml
-site:
-  title: "你的博客"
-  subtitle: "记录你的想法"
-  url: "https://your-site.com"
-  author: "你的名字"
+- `src/consts.ts`：站点信息、导航、社交链接、每页数量和评论服务地址。
+- `astro.config.ts`：站点域名、Markdown 与构建配置。修改域名时同步更新 `src/consts.ts` 和两处 `CNAME`。
+- `src/content.config.ts`：文章字段定义。
+- `src/content/blog/`：文章源文件。
+- `src/pages/`：页面和路由。
+- `src/layouts/`、`src/components/`：布局和组件。
+- `src/styles/global.css`：全局样式。
+- `public/images/`：静态图片。
+- `public/links.json`：友情链接。
+
+## 添加文章
+
+```sh
+pnpm new-post my-post "我的文章标题"
 ```
 
-功能开关：
-
-```yaml
-features:
-  comments: false   # 评论区
-  donate: false     # 捐赠按钮
-  series: true      # 专题系列
-```
-
-## 添加内容
-
-在 `src/content/posts/` 下创建文章：
+脚本创建 `src/content/blog/my-post.md`，默认设为草稿。也可以手动创建：
 
 ```markdown
 ---
-title: "第一篇文章"
-published: 2025-01-01
-tags: ["astro", "博客"]
-category: "技术"
+title: "我的文章标题"
+description: "文章摘要"
+date: 2026-09-30
+tags: ["生活"]
+category: "日志"
+cover: "/images/my-post/cover.webp"
+pinned: false
+draft: true
 ---
 
-内容...
+文章正文。
 ```
 
-其他内容类型：
-- `src/content/seri/` — 专题系列
-- `src/content/spec/` — 独立页面（关于等）
-- `src/data/links.yml` — 友链
-- `src/data/essays.yml` — 微记录
-- `src/data/photos.yml` — 相册
+`updated` 是可选的更新日期。发布时将 `draft` 改为 `false`；草稿不进入文章页面、列表、分类、标签、搜索、统计或 RSS。文章地址为 `/post/my-post/`，旧 `/posts/` 路径保留跳转。
+
+## 评论
+
+在 `src/consts.ts` 中设置 `walineServer` 为实际 Waline 服务地址即可显示评论。当前为空，因此未启用。项目不包含 Waline 服务端。
 
 ## 部署
 
-```bash
-pnpm build     # 生成 dist/
-```
-
-纯静态输出，可部署到 Cloudflare Pages、Vercel、Netlify 或任意静态托管服务。
-
-## 许可
-
-MIT — 自由使用，无需署名。
+`.github/workflows/deploy.yml` 在推送到 `main` 或手动触发时安装依赖、构建并部署到 GitHub Pages。自定义域名由 `public/CNAME` 随构建产物发布。

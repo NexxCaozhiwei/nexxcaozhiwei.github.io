@@ -5,15 +5,15 @@
   "frontMatter.content.publicFolder": "public",
   "frontMatter.content.pageFolders": [
     {
-      "title": "posts",
-      "path": "[[workspace]]/src/content/posts"
+      "title": "blog",
+      "path": "[[workspace]]/src/content/blog"
     }
   ],
   "frontMatter.taxonomy.contentTypes": [
     {
       "name": "default",
       "pageBundle": true,
-      "previewPath": "'blog'",
+      "previewPath": "'post/' + slug",
       "filePrefix": null,
       "clearEmpty": true,
       "fields": [
@@ -29,15 +29,15 @@
           "type": "string"
         },
         {
-          "title": "published",
-          "name": "published",
+          "title": "date",
+          "name": "date",
           "type": "datetime",
           "default": "{{now}}",
           "isPublishDate": true
         },
         {
-          "title": "preview",
-          "name": "image",
+          "title": "cover",
+          "name": "cover",
           "type": "image",
           "isPreviewImage": true
         },
@@ -54,12 +54,8 @@
         {
           "title": "draft",
           "name": "draft",
-          "type": "boolean"
-        },
-        {
-          "title": "language",
-          "name": "language",
-          "type": "string"
+          "type": "boolean",
+          "default": true
         }
       ]
     }

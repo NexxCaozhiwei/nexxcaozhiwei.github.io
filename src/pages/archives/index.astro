@@ -4,7 +4,7 @@ import BlogLayout from '../../layouts/BlogLayout.astro';
 import PostList from '../../components/PostList.astro';
 import { resolveCover } from '../_imageStore';
 
-const allPosts = await getCollection('blog');
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
 const sorted = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
 const postData = sorted.map((p) => ({

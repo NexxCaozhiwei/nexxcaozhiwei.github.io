@@ -4,7 +4,7 @@ import {SITE_TITLE, NAV_ITEMS} from '../consts';
 import {getWordCount} from '../utils/readingTime';
 import {SITE_AUTHOR} from "../consts.ts";
 
-const allBlogPosts = await getCollection('blog');
+const allBlogPosts = await getCollection('blog', ({ data }) => !data.draft);
 const totalArticles = allBlogPosts.length;
 
 let totalWords = 0;

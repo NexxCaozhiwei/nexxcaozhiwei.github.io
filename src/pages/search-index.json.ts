@@ -18,7 +18,7 @@ function stripMarkdown(raw: string): string {
 }
 
 export async function GET() {
-  const blogPosts = await getCollection('blog');
+  const blogPosts = await getCollection('blog', ({ data }) => !data.draft);
 
   const entries = blogPosts.map((p) => ({
     title: p.data.title,

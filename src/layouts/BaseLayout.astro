@@ -20,6 +20,7 @@ const {
 } = Astro.props;
 
 const pageTitle = title ? `${title} - ${SITE_TITLE}` : SITE_TITLE;
+const socialImage = image ? new URL(image, Astro.site ?? Astro.url).href : undefined;
 ---
 
 <!doctype html>
@@ -38,12 +39,12 @@ const pageTitle = title ? `${title} - ${SITE_TITLE}` : SITE_TITLE;
     <meta property="og:title" content={pageTitle} />
     <meta property="og:type" content={ogType} />
     <meta property="og:description" content={description} />
-    {image && <meta property="og:image" content={image} />}
+    {socialImage && <meta property="og:image" content={socialImage} />}
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
-    {image && <meta name="twitter:image" content={image} />}
+    {socialImage && <meta name="twitter:image" content={socialImage} />}
 
     <link rel="alternate" type="application/rss+xml" title={SITE_TITLE} href="/rss.xml" />
 

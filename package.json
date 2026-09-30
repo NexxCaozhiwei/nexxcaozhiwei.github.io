@@ -4,6 +4,7 @@
   "description": "Personal Astro blog based on astro-theme-sify",
   "type": "module",
   "scripts": {
+    "new-post": "node scripts/new-post.js",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview"

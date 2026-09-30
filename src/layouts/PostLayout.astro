@@ -18,7 +18,7 @@ interface Props {
 const {title, description, headings, cover} = Astro.props;
 ---
 
-<BaseLayout title={title} description={description} ogType="article" ogImage={cover}>
+<BaseLayout title={title} description={description} ogType="article" image={cover}>
   {
     cover && (
       <div class="relative w-full h-64 sm:h-80 lg:h-96 overflow-hidden -mt-16 mb-8">

@@ -16,7 +16,7 @@ const args = process.argv.slice(2)
 
 if (args.length === 0) {
   console.error(`Error: No filename argument provided
-Usage: npm run new-post -- <filename>`)
+Usage: pnpm new-post <filename> [title]`)
   process.exit(1) // Terminate the script and return error code 1
 }
 
@@ -28,8 +28,13 @@ if (!fileExtensionRegex.test(fileName)) {
   fileName += ".md"
 }
 
-const targetDir = "./src/content/posts/"
-const fullPath = path.join(targetDir, fileName)
+const targetDir = path.resolve("./src/content/blog/")
+const fullPath = path.resolve(targetDir, fileName)
+const relativePath = path.relative(targetDir, fullPath)
+if (relativePath.startsWith("..") || path.isAbsolute(relativePath)) {
+  console.error("Error: Filename must stay inside src/content/blog")
+  process.exit(1)
+}
 
 if (fs.existsSync(fullPath)) {
   console.error(`Error: File ${fullPath} already exists `)
@@ -43,17 +48,17 @@ if (!fs.existsSync(dirPath)) {
 }
 
 const content = `---
-title: ${args[0]}
-published: ${getDate()}
+title: ${JSON.stringify(args[1] || args[0])}
+date: ${getDate()}
 description: ''
-image: ''
+cover: ''
 tags: []
 category: ''
-draft: false 
-lang: ''
+pinned: false
+draft: true
 ---
 `
 
-fs.writeFileSync(path.join(targetDir, fileName), content)
+fs.writeFileSync(fullPath, content, { flag: "wx" })
 
 console.log(`Post ${fullPath} created`)
