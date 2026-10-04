@@ -25,7 +25,7 @@ const filtered = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
           <li>
             <a
               href={`#${heading.slug}`}
-              class={`block text-xs py-1 transition-colors hover:text-primary text-gray-500 dark:text-gray-400 ${
+              class={`block text-xs py-1 transition-colors hover:text-primary text-gray-500 dark:text-gray-400 break-words [overflow-wrap:anywhere] ${
                 heading.depth === 3 ? 'pl-4' : ''
               }`}
             >

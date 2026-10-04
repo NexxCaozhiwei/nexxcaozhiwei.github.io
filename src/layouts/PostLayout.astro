@@ -36,7 +36,7 @@ const { title, description, headings, cover } = Astro.props;
     <div class="flex flex-col lg:flex-row gap-8 py-8">
       {
         headings && headings.length > 0 && (
-          <aside class="w-full lg:w-56 shrink-0 order-1">
+          <aside class="w-full lg:w-56 min-w-0 shrink-0 order-1">
             <div class="sticky top-24">
               <TableOfContents headings={headings}/>
             </div>
