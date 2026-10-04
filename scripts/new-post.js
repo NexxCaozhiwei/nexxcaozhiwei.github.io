@@ -1,50 +1,50 @@
 /* This is a script to create a new post markdown file with front-matter */
 
-import fs from "fs"
-import path from "path"
+import fs from 'node:fs';
+import path from 'node:path';
 
 function getDate() {
-  const today = new Date()
-  const year = today.getFullYear()
-  const month = String(today.getMonth() + 1).padStart(2, "0")
-  const day = String(today.getDate()).padStart(2, "0")
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
 
-  return `${year}-${month}-${day}`
+  return `${year}-${month}-${day}`;
 }
 
-const args = process.argv.slice(2)
+const args = process.argv.slice(2);
 
 if (args.length === 0) {
   console.error(`Error: No filename argument provided
-Usage: pnpm new-post <filename> [title]`)
-  process.exit(1) // Terminate the script and return error code 1
+Usage: pnpm new-post <filename> [title]`);
+  process.exit(1); // Terminate the script and return error code 1
 }
 
-let fileName = args[0]
+let fileName = args[0];
 
 // Add .md extension if not present
-const fileExtensionRegex = /\.(md|mdx)$/i
+const fileExtensionRegex = /\.(md|mdx)$/i;
 if (!fileExtensionRegex.test(fileName)) {
-  fileName += ".md"
+  fileName += '.md';
 }
 
-const targetDir = path.resolve("./src/content/blog/")
-const fullPath = path.resolve(targetDir, fileName)
-const relativePath = path.relative(targetDir, fullPath)
-if (relativePath.startsWith("..") || path.isAbsolute(relativePath)) {
-  console.error("Error: Filename must stay inside src/content/blog")
-  process.exit(1)
+const targetDir = path.resolve('./src/content/blog/');
+const fullPath = path.resolve(targetDir, fileName);
+const relativePath = path.relative(targetDir, fullPath);
+if (relativePath.startsWith('..') || path.isAbsolute(relativePath)) {
+  console.error('Error: Filename must stay inside src/content/blog');
+  process.exit(1);
 }
 
 if (fs.existsSync(fullPath)) {
-  console.error(`Error: File ${fullPath} already exists `)
-  process.exit(1)
+  console.error(`Error: File ${fullPath} already exists `);
+  process.exit(1);
 }
 
 // recursive mode creates multi-level directories
-const dirPath = path.dirname(fullPath)
+const dirPath = path.dirname(fullPath);
 if (!fs.existsSync(dirPath)) {
-    fs.mkdirSync(dirPath, { recursive: true })
+  fs.mkdirSync(dirPath, { recursive: true });
 }
 
 const content = `---
@@ -57,8 +57,8 @@ category: ''
 pinned: false
 draft: true
 ---
-`
+`;
 
-fs.writeFileSync(fullPath, content, { flag: "wx" })
+fs.writeFileSync(fullPath, content, { flag: 'wx' });
 
-console.log(`Post ${fullPath} created`)
+console.log(`Post ${fullPath} created`);

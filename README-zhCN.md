@@ -17,6 +17,8 @@ pnpm install
 pnpm dev
 pnpm build
 pnpm preview
+pnpm lint      # Biome 检查
+pnpm format    # Biome 格式化（会写入文件）
 ```
 
 开发地址通常为 http://localhost:4321，构建输出在 `dist/`。
@@ -24,13 +26,15 @@ pnpm preview
 ## 配置与目录
 
 - `src/consts.ts`：站点信息、导航、社交链接、每页数量和评论服务地址。
-- `astro.config.ts`：站点域名、Markdown 与构建配置。修改域名时同步更新 `src/consts.ts` 和两处 `CNAME`。
+- `astro.config.ts`：站点域名、Markdown 与构建配置。修改域名时同步更新 `src/consts.ts` 以及根目录和 `public/` 下的两处 `CNAME`（根目录那份是给 GitHub Pages 直接识别用的）。
 - `src/content.config.ts`：文章字段定义。
 - `src/content/blog/`：文章源文件。
-- `src/pages/`：页面和路由。
+- `src/utils/posts.ts`：全站共用的文章聚合（排序、分类、标签、字数统计），带模块级缓存，避免每个页面重复读取 collection。
+- `src/utils/slug.ts`：分类与标签的 URL 归一化规则。
+- `src/pages/`：页面和路由。`sitemap.xml` 与 `robots.txt` 是构建时生成的接口路由。
 - `src/layouts/`、`src/components/`：布局和组件。
 - `src/styles/global.css`：全局样式。
-- `public/images/`：静态图片。
+- `public/images/`：静态图片，大图统一使用 WebP。
 - `public/links.json`：友情链接。
 
 ## 添加文章
@@ -57,6 +61,8 @@ draft: true
 ```
 
 `updated` 是可选的更新日期。发布时将 `draft` 改为 `false`；草稿不进入文章页面、列表、分类、标签、搜索、统计或 RSS。文章地址为 `/post/my-post/`，旧 `/posts/` 路径保留跳转。
+
+分类与标签地址由名称归一化生成（小写、空格转连字符、中文保留），例如 `AI 编程` 对应 `/tags/ai-编程/`，迁移前的旧地址会自动 301 跳到新地址。站点地图和爬虫规则分别由 `/sitemap.xml`、`/robots.txt` 在构建时生成。
 
 ## 评论
 
