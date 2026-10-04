@@ -10,6 +10,8 @@ interface Props {
   description?: string;
   image?: string;
   ogType?: string;
+  /** 站内辅助页面（例如 404）不应被搜索引擎收录 */
+  noindex?: boolean;
 }
 
 const {
@@ -17,10 +19,14 @@ const {
   description = SITE_DESCRIPTION,
   image,
   ogType = 'website',
+  noindex = false,
 } = Astro.props;
 
 const pageTitle = title ? `${title} - ${SITE_TITLE}` : SITE_TITLE;
 const socialImage = image ? new URL(image, Astro.site ?? Astro.url).href : undefined;
+
+// 统一收敛到无尾斜杠之外的一致形式：Astro 的静态输出目录带尾斜杠，canonical 也保持一致。
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
 ---
 
 <!doctype html>
@@ -34,7 +40,12 @@ const socialImage = image ? new URL(image, Astro.site ?? Astro.url).href : undef
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <meta name="author" content={SITE_AUTHOR} />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow'} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#e9536a" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
 
     <meta property="og:title" content={pageTitle} />
     <meta property="og:type" content={ogType} />

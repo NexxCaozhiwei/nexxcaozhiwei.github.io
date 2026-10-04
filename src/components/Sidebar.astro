@@ -1,53 +1,24 @@
 ---
-import { getCollection } from 'astro:content';
 import { SITE_AUTHOR, SITE_DESCRIPTION, SITE_AVATAR, SOCIAL_LINKS } from '../consts';
-import { getWordCount } from '../utils/readingTime';
-
-const allPosts = await getCollection('blog', ({ data }) => !data.draft);
-const sorted = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
-
-const totalPosts = sorted.length;
-let totalWords = 0;
-const categoryMap = new Map<
-  string,
-  { count: number; recentPosts: typeof allPosts; displayName: string }
->();
-const tagMap = new Map<string, number>();
-
-for (const post of sorted) {
-  totalWords += getWordCount(post.body || '');
-
-  const cat = post.data.category;
-  if (cat) {
-    const rootCat = cat.split('/')[0];
-    if (!categoryMap.has(rootCat)) {
-      categoryMap.set(rootCat, { count: 0, recentPosts: [], displayName: rootCat });
-    }
-    const entry = categoryMap.get(rootCat)!;
-    entry.count++;
-    if (entry.recentPosts.length < 3) {
-      entry.recentPosts.push(post);
-    }
-  }
-
-  for (const tag of post.data.tags || []) {
-    tagMap.set(tag, (tagMap.get(tag) || 0) + 1);
-  }
-}
-
-const allCategories = Array.from(categoryMap.entries());
-const allTags = Array.from(tagMap.entries()).sort((a, b) => b[1] - a[1]);
+import { getCategoryBuckets, getPostStats, getPosts, getTagBuckets } from '../utils/posts';
+import { taxonomyUrl } from '../utils/slug';
 
 const CATEGORY_LIMIT = 5;
 const TAG_LIMIT = 15;
+const RECOMMEND_LIMIT = 5;
 
-const randomPosts = sorted
-  .sort(() => Math.random() - 0.5)
-  .slice(0, 5);
+const [{ totalPosts, totalWords }, allPosts, allCategories, allTags] = await Promise.all([
+  getPostStats(),
+  getPosts(),
+  getCategoryBuckets(),
+  getTagBuckets(),
+]);
 
-function slugify(post: (typeof sorted)[0]) {
-  return post.id;
-}
+// 只展示根分类，计数已包含子分类。
+const categories = allCategories.filter((bucket) => !bucket.name.includes('/'));
+
+// 推荐位使用固定规则（最新的前几篇），避免每次构建产出不同的 HTML。
+const recommended = allPosts.slice(0, RECOMMEND_LIMIT);
 ---
 
 <aside class="space-y-6">
@@ -72,12 +43,12 @@ function slugify(post: (typeof sorted)[0]) {
         >
           {link.icon === 'github' && (
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
             </svg>
           )}
           {link.icon === 'rss' && (
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/>
+              <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z" />
             </svg>
           )}
           {!['github', 'rss'].includes(link.icon) && (
@@ -88,10 +59,10 @@ function slugify(post: (typeof sorted)[0]) {
     </div>
 
     <div class="flex items-center justify-center gap-6 mt-4 pt-4 border-t border-gray-100 dark:border-gray-800">
-      <div class="text-center">
+      <a href="/archives/" class="text-center hover:text-primary transition-colors">
         <div class="font-semibold text-sm">{totalPosts}</div>
         <div class="text-xs text-gray-400">文章</div>
-      </div>
+      </a>
       <div class="text-center">
         <div class="font-semibold text-sm">{Math.round(totalWords / 1000)}k</div>
         <div class="text-xs text-gray-400">字数</div>
@@ -100,90 +71,76 @@ function slugify(post: (typeof sorted)[0]) {
   </div>
 
   {
-    allCategories.length > 0 && (
-      <div class="bg-white dark:bg-[var(--color-card-dark)] rounded-2xl shadow-sm p-5"
-        data-sidebar-section="categories"
-      >
-        <h2 class="text-sm font-semibold mb-3 text-gray-900 dark:text-gray-100">
-          分类
-        </h2>
+    categories.length > 0 && (
+      <div class="bg-white dark:bg-[var(--color-card-dark)] rounded-2xl shadow-sm p-5" data-sidebar-section="categories">
+        <h2 class="text-sm font-semibold mb-3 text-gray-900 dark:text-gray-100">分类</h2>
         <div class="sidebar-expand-list flex flex-wrap gap-2">
-          {allCategories.map(([name, info], i) => (
+          {categories.map((category, i) => (
             <a
-              href={`/categories/${name}`}
+              href={taxonomyUrl('category', category.slug)}
               class={`text-xs px-3 py-1.5 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-primary hover:text-white dark:hover:bg-primary transition-colors ${
                 i >= CATEGORY_LIMIT ? 'hidden sidebar-extra' : ''
               }`}
             >
-              {info.displayName}
-              <span class="ml-1 opacity-60">({info.count})</span>
+              {category.displayName}
+              <span class="ml-1 opacity-60">({category.count})</span>
             </a>
           ))}
         </div>
-        {
-          allCategories.length > CATEGORY_LIMIT && (
-            <button
-              type="button"
-              class="sidebar-toggle-btn mt-3 text-xs text-primary hover:underline"
-              data-expanded="false"
-            >
-              显示全部 ({allCategories.length})
-            </button>
-          )
-        }
+        {categories.length > CATEGORY_LIMIT && (
+          <button
+            type="button"
+            class="sidebar-toggle-btn mt-3 text-xs text-primary hover:underline"
+            data-expanded="false"
+          >
+            显示全部 ({categories.length})
+          </button>
+        )}
       </div>
     )
   }
 
   {
     allTags.length > 0 && (
-      <div class="bg-white dark:bg-[var(--color-card-dark)] rounded-2xl shadow-sm p-5"
-        data-sidebar-section="tags"
-      >
-        <h2 class="text-sm font-semibold mb-3 text-gray-900 dark:text-gray-100">
-          标签
-        </h2>
+      <div class="bg-white dark:bg-[var(--color-card-dark)] rounded-2xl shadow-sm p-5" data-sidebar-section="tags">
+        <h2 class="text-sm font-semibold mb-3 text-gray-900 dark:text-gray-100">标签</h2>
         <div class="sidebar-expand-list flex flex-wrap gap-2">
-          {allTags.map(([tag, count], i) => (
+          {allTags.map((tag, i) => (
             <a
-              href={`/tags/${tag}`}
+              href={taxonomyUrl('tag', tag.slug)}
               class={`text-xs px-3 py-1.5 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-primary hover:text-white dark:hover:bg-primary transition-colors ${
                 i >= TAG_LIMIT ? 'hidden sidebar-extra' : ''
               }`}
             >
-              {tag}
-              <span class="ml-1 opacity-60">({count})</span>
+              {tag.name}
+              <span class="ml-1 opacity-60">({tag.count})</span>
             </a>
           ))}
         </div>
-        {
-          allTags.length > TAG_LIMIT && (
-            <button
-              type="button"
-              class="sidebar-toggle-btn mt-3 text-xs text-primary hover:underline"
-              data-expanded="false"
-            >
-              显示全部 ({allTags.length})
-            </button>
-          )
-        }
+        {allTags.length > TAG_LIMIT && (
+          <button
+            type="button"
+            class="sidebar-toggle-btn mt-3 text-xs text-primary hover:underline"
+            data-expanded="false"
+          >
+            显示全部 ({allTags.length})
+          </button>
+        )}
       </div>
     )
   }
 
   {
-    randomPosts.length > 0 && (
+    recommended.length > 0 && (
       <div class="bg-white dark:bg-[var(--color-card-dark)] rounded-2xl shadow-sm p-5">
-        <h2 class="text-sm font-semibold mb-4 text-gray-900 dark:text-gray-100">
-          随机推荐
-        </h2>
+        <h2 class="text-sm font-semibold mb-4 text-gray-900 dark:text-gray-100">最新文章</h2>
         <div class="space-y-2">
-          {randomPosts.map((post) => (
+          {recommended.map((post) => (
             <a
-              href={`/post/${slugify(post)}`}
+              href={`/post/${post.slug}/`}
               class="block text-xs text-gray-500 dark:text-gray-400 truncate hover:text-primary transition-colors"
             >
-              {post.data.title}
+              {post.title}
             </a>
           ))}
         </div>

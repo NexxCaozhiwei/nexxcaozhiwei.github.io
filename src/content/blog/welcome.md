@@ -12,7 +12,7 @@ draft: false
 
 这个网站已经迁移到 Astro，并使用 Lonetrail 主题。
 
-以后文章会放在 `src/content/posts/` 目录中。每篇文章都是一个 Markdown 文件，顶部使用 frontmatter 配置标题、发布日期、标签和分类。
+以后文章会放在 `src/content/blog/` 目录中，新增文章可以直接运行 `pnpm new-post` 生成模板。每篇文章都是一个 Markdown 文件，顶部使用 frontmatter 配置标题、发布日期、标签和分类。
 
 ## 后续计划
 

@@ -15,7 +15,7 @@ interface Props {
   cover?: string;
 }
 
-const {title, description, headings, cover} = Astro.props;
+const { title, description, headings, cover } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description} ogType="article" image={cover}>

@@ -1,16 +1,8 @@
 ---
-import {getCollection} from 'astro:content';
-import {SITE_TITLE, NAV_ITEMS} from '../consts';
-import {getWordCount} from '../utils/readingTime';
-import {SITE_AUTHOR} from "../consts.ts";
+import { NAV_ITEMS, SITE_AUTHOR } from '../consts';
+import { getPostStats } from '../utils/posts';
 
-const allBlogPosts = await getCollection('blog', ({ data }) => !data.draft);
-const totalArticles = allBlogPosts.length;
-
-let totalWords = 0;
-for (const post of allBlogPosts) {
-  totalWords += getWordCount(post.body || '');
-}
+const { totalPosts: totalArticles, totalWords } = await getPostStats();
 
 const currentYear = new Date().getFullYear();
 const startYear = 2026;

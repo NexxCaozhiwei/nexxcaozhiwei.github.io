@@ -8,7 +8,7 @@ tags:
   - 老旧系统维护
 category: Windows
 description: 没有网络也能安装 IE11：从确认 Windows 7 SP1、准备前置补丁，到安装、重启和版本验证，一步一步照着操作即可。
-cover: /assets/images/windows/ie11/ie11-install-flow.png
+cover: /assets/images/windows/ie11/ie11-install-flow.webp
 ---
 
 如果一台 Windows 7 电脑不能上网，但老旧业务系统又要求使用 Internet Explorer 11（IE11），直接双击 IE11 安装程序，常常会看到“缺少必要更新”的提示。
@@ -17,7 +17,7 @@ cover: /assets/images/windows/ie11/ie11-install-flow.png
 
 > **先提醒一句：**Windows 7 和 IE11 都已经停止官方支持，不适合日常上网。本文只适用于必须维护老旧内网系统、工业软件或兼容性业务系统的情况。
 
-![Windows 7 离线安装 IE11 的五步流程](/assets/images/windows/ie11/ie11-install-flow.png)
+![Windows 7 离线安装 IE11 的五步流程](/assets/images/windows/ie11/ie11-install-flow.webp)
 
 ## 开始之前：你需要准备什么
 
@@ -46,7 +46,7 @@ winver
 - `Windows 7`
 - `Service Pack 1`
 
-![通过 winver 查看 Windows 7 SP1 版本（示意图）](/assets/images/windows/ie11/win7-version.png)
+![通过 winver 查看 Windows 7 SP1 版本（示意图）](/assets/images/windows/ie11/win7-version.webp)
 
 如果没有看到 `Service Pack 1`，请先安装 Windows 7 SP1（KB976932），完成并重启后再继续。没有 SP1，IE11 无法正常安装。
 
@@ -138,7 +138,7 @@ IE11-Windows6.1-x64-zh-cn.exe
 
 如果窗口里显示 `Internet Explorer 11`，并且版本号以 `11.0` 开头，就说明安装成功。
 
-![在“关于 Internet Explorer”中验证 IE11 版本（示意图）](/assets/images/windows/ie11/ie11-version-check.png)
+![在“关于 Internet Explorer”中验证 IE11 版本（示意图）](/assets/images/windows/ie11/ie11-version-check.webp)
 
 也可以打开“命令提示符”，执行：
 

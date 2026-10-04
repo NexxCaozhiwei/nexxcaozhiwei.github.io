@@ -8,7 +8,7 @@ tags:
   - 随笔
 category: Life
 description: 不是关于“AI 能不能替代程序员”，而是关于一个普通人怎样把脑海里的小念头，一点点做成真的能用的东西。
-cover: /images/blog/vibe-coding-for-friends/cover.png
+cover: /images/blog/vibe-coding-for-friends/cover.webp
 ---
 
 最近有朋友问我：你最近到底在忙什么？怎么总是在做一些看起来“很小”，但又很具体的软件和工具？
@@ -45,7 +45,7 @@ cover: /images/blog/vibe-coding-for-friends/cover.png
 
 你会发现，生活里很多原本只能忍受的小麻烦，突然都变成了可以被解决的问题。
 
-![一个放在桌面边缘的轻量状态工具，显示忙碌、等待、完成和额度等抽象状态](/images/blog/vibe-coding-for-friends/codex-bar.png)
+![一个放在桌面边缘的轻量状态工具，显示忙碌、等待、完成和额度等抽象状态](/images/blog/vibe-coding-for-friends/codex-bar.webp)
 
 ---
 
@@ -172,7 +172,7 @@ Vibe Coding 给我的一个很大变化，就是让我更愿意开始。
 
 你可以先把一个模糊的想法说出来，然后在做的过程中慢慢变清楚。
 
-![从草图、组件到可用应用的三段式过程，表现想法一步步变成工具](/images/blog/vibe-coding-for-friends/idea-to-app.png)
+![从草图、组件到可用应用的三段式过程，表现想法一步步变成工具](/images/blog/vibe-coding-for-friends/idea-to-app.webp)
 
 ---
 

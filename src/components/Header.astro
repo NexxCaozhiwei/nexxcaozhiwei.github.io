@@ -2,7 +2,7 @@
 import { SITE_TITLE, NAV_ITEMS } from '../consts';
 import Search from './Search.astro';
 
-function isArticleLabel(item: typeof NAV_ITEMS[number]) {
+function isArticleLabel(item: (typeof NAV_ITEMS)[number]) {
   return item.label === '文章';
 }
 ---
