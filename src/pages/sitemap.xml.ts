@@ -16,6 +16,7 @@ const STATIC_PAGES: { path: string; changefreq: string; priority: string }[] = [
   { path: '/archives', changefreq: 'weekly', priority: '0.8' },
   { path: '/categories', changefreq: 'weekly', priority: '0.6' },
   { path: '/tags', changefreq: 'weekly', priority: '0.6' },
+  { path: '/portal/', changefreq: 'weekly', priority: '0.6' },
   { path: '/friends', changefreq: 'monthly', priority: '0.5' },
   { path: '/about', changefreq: 'monthly', priority: '0.5' },
 ];

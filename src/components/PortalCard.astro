@@ -1,0 +1,48 @@
+---
+interface Props {
+  site: {
+    id: string;
+    name: string;
+    url: string;
+    description: string;
+    category: string;
+    tags: string[];
+    icon?: string;
+  };
+}
+
+const { site } = Astro.props;
+const domain = new URL(site.url).hostname.replace(/^www\./, '');
+const searchText = [site.name, domain, site.description, site.category, ...site.tags].join(' ').toLowerCase();
+---
+
+<a
+  href={site.url}
+  target="_blank"
+  rel="noopener noreferrer"
+  data-portal-card
+  data-category={site.category}
+  data-search={searchText}
+  class="portal-card card-hover flex h-full flex-col rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] p-6 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+  aria-label={`${site.name}（在新标签页打开）`}
+>
+  <div class="flex items-start gap-4">
+    <span class="relative flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-primary/10 text-xl font-bold text-primary" aria-hidden="true">
+      {site.name.slice(0, 1).toUpperCase()}
+      {site.icon && <img src={site.icon} alt="" width="48" height="48" loading="lazy" referrerpolicy="no-referrer" data-portal-icon class="absolute inset-0 h-full w-full bg-[var(--color-card)] object-contain p-2" />}
+    </span>
+    <div class="min-w-0 flex-1">
+      <h3 class="font-semibold">{site.name}</h3>
+      <p class="break-all text-xs text-[var(--color-text-secondary)] mt-1">{domain}</p>
+    </div>
+    <svg class="h-4 w-4 shrink-0 text-[var(--color-text-secondary)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14 4h6v6M20 4 10 14M10 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-5" /></svg>
+  </div>
+  <p class="mt-5 mb-5 flex-1 text-sm leading-relaxed text-[var(--color-text-secondary)]">{site.description}</p>
+  <div class="flex flex-wrap gap-2">
+    {site.tags.map((tag) => <span class="rounded-md bg-primary/8 px-2 py-1 text-xs text-primary dark:text-primary-light">{tag}</span>)}
+  </div>
+</a>
+
+<style>
+  .portal-card[hidden] { display: none; }
+</style>

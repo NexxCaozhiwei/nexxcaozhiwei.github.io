@@ -1,0 +1,35 @@
+[
+  {
+    "id": "foreverchanges",
+    "name": "ForeverChanges",
+    "url": "https://foreverchanges.pro/zh-cn",
+    "description": "查阅 WoW Forever 的职业改动、天赋、法术与地下城资料，探索地图和装备。",
+    "category": "魔兽世界",
+    "tags": ["WoW Forever", "数据库", "天赋"],
+    "icon": "https://foreverchanges.pro/favicon.ico",
+    "featured": false,
+    "addedAt": "2026-10-30"
+  },
+  {
+    "id": "guguah",
+    "name": "咕咕交易所",
+    "url": "https://guguah.com/",
+    "description": "查看魔兽世界无限的拍卖行价格与历史行情，寻找加工、转售和贸易套利机会。",
+    "category": "魔兽世界",
+    "tags": ["WoW Forever", "拍卖行", "套利"],
+    "icon": "https://guguah.com/favicon.ico",
+    "featured": false,
+    "addedAt": "2026-10-30"
+  },
+  {
+    "id": "ahledger",
+    "name": "AHledger",
+    "url": "https://ahledger.com/",
+    "description": "查询 WoW Forever 拍卖行价格、物品与专业配方，结合制造利润和市场工具了解行情。",
+    "category": "魔兽世界",
+    "tags": ["WoW Forever", "拍卖行", "专业制造"],
+    "icon": "https://ahledger.com/favicon.ico",
+    "featured": false,
+    "addedAt": "2026-10-30"
+  }
+]

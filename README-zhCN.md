@@ -64,6 +64,10 @@ draft: true
 
 分类与标签地址由名称归一化生成（小写、空格转连字符、中文保留），例如 `AI 编程` 对应 `/tags/ai-编程/`，迁移前的旧地址会自动 301 跳到新地址。站点地图和爬虫规则分别由 `/sitemap.xml`、`/robots.txt` 在构建时生成。
 
+## 传送门
+
+`/portal/` 展示个人网站收藏，支持按分类和关键词组合筛选。编辑 `src/data/portal.json` 即可增删网站：`id` 为唯一标识，`name`、`url`、`description` 填写网站信息，`category` 和 `tags` 用于筛选，`icon` 可选，`featured` 决定是否加入常用入口，`addedAt` 记录添加日期。分类根据收藏自动生成；图标不可用时显示名称首字母。
+
 ## 评论
 
 在 `src/consts.ts` 中设置 `walineServer` 为实际 Waline 服务地址即可显示评论。当前为空，因此未启用。项目不包含 Waline 服务端。
